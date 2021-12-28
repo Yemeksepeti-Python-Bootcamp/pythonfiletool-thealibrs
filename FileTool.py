@@ -1,4 +1,5 @@
 import csv,json
+from pathlib import Path
 
 class FileTool:
     def __init__(self, path, fields = []):
@@ -26,30 +27,34 @@ class FileTool:
         with open(self.path, "r") as file:
             contents = file.read()
             print(contents)
-            
+
     
     def file_operations(self):
         """
             This method is used to File Operations like 
             searching, reading, updating and deleting.
         """
-        menu = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
-        choice = input(menu)
+        if Path(self.path).exists():
+            menu = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
+            choice = input(menu)
 
-        # searching if choice 1
-        if choice == "1":
-            key = input("Enter a word that you want to search: ")
-            with open(self.path) as file:
-                # reads all lines
-                contents = file.readlines()
             
-            # creates a list that if matches that desired word with content
-            found_lines = [ data for data in contents if key in data ]
+            if choice == "1": # searching if choice 1
+                key = input("Enter a word that you want to search: ")
+                with open(self.path) as file:
+                    contents = file.readlines() # reads all lines
+                found_lines = [ data for data in contents if key in data ] # creates a list that if matches that desired word with content
 
-            if len(found_lines) != 0:
-                print(f"{key} found in {len(found_lines)} lines: \n", *found_lines)
-            else:
-                print(f"Nothing matched with {key} in the content!")
+                if len(found_lines) != 0:
+                    print(f"{key} found in {len(found_lines)} lines: \n", *found_lines)
+                else:
+                    print(f"Nothing matched with {key} in the content!")
+            
+            elif choice == "2":
+                key = input("Enter a word that you want to delete: ")
+        else:
+            print("There is no file in the given path")
+
 
 
        
@@ -59,7 +64,7 @@ class FileTool:
 
 
 
-ft = FileTool('C:\\Users\\BarisAyten\\Desktop\\pythonfiletool-thealibrs\\lorem.txt')
+ft = FileTool('C:\\Users\\BarisAyten\\Desktop\\pythonfiletool-thealibrs\\lorem1.txt')
 
 ft.file_operations()
 
