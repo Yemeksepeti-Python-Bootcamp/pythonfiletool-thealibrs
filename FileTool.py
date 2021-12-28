@@ -7,6 +7,13 @@ class FileTool:
         self.fields = fields
 
 
+    def isFileExist(self):
+        """
+            Helper method that checks the file exist or not
+            returns bool 
+        """
+        return Path(self.path).exists()
+
     def create_new_file(self):
         """
             This method is used to create a new file 
@@ -64,12 +71,7 @@ class FileTool:
 
 
 
-    def isFileExist(self):
-        """
-            Helper method that checks file exist or not
-            return bool
-        """
-        return Path(self.path).exists()
+   
        
 
 
