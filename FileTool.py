@@ -27,13 +27,6 @@ class FileTool:
         with open(self.path, "r") as file:
             contents = file.read()
             print(contents)
-
-    def isFileExist(self):
-        """
-            Helper method that checks file exist or not
-            returns boolean value
-        """
-        return Path(self.path).exists()
     
     def file_operations(self):
         """
