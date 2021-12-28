@@ -9,7 +9,6 @@ class FileTool:
     def create_new_file(self):
         """
             This method is used to create a new file 
-
         """
         file_name = input("Enter a file name: ")
         file_format = input("Write file format?\n- csv\n- json\n- txt\n")
@@ -23,17 +22,16 @@ class FileTool:
     def read_file(self):
         """
             This method is used to read all data from files.
-
         """
         with open(self.path, "r") as file:
             contents = file.read()
             print(contents)
+            
     
     def file_operations(self):
         """
             This method is used to File Operations like 
             searching, reading, updating and deleting.
-
         """
         menu = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
         choice = input(menu)
@@ -48,7 +46,10 @@ class FileTool:
             # creates a list that if matches that desired word with content
             found_lines = [ data for data in contents if key in data ]
 
-            print(f"{key} found in {len(found_lines)} lines: \n", *found_lines)
+            if len(found_lines) != 0:
+                print(f"{key} found in {len(found_lines)} lines: \n", *found_lines)
+            else:
+                print(f"Nothing matched with {key} in the content!")
 
 
        
