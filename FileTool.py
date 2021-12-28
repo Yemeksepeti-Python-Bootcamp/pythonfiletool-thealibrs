@@ -28,17 +28,22 @@ class FileTool:
             contents = file.read()
             print(contents)
 
+    def isFileExist(self):
+        """
+            Helper method that checks file exist or not
+            returns boolean value
+        """
+        return Path(self.path).exists()
     
     def file_operations(self):
         """
             This method is used to File Operations like 
             searching, reading, updating and deleting.
         """
-        if Path(self.path).exists():
+        if self.isFileExist():
             menu = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
             choice = input(menu)
 
-            
             if choice == "1": # searching if choice 1
                 key = input("Enter a word that you want to search: ")
                 with open(self.path) as file:
@@ -50,21 +55,36 @@ class FileTool:
                 else:
                     print(f"Nothing matched with {key} in the content!")
             
-            elif choice == "2":
-                key = input("Enter a word that you want to delete: ")
+            elif choice == "2": # deleting
+                # key = input("Enter a word that you want to delete: ")
+                pass
+
+            elif choice == "3":
+                key = input("Enter anything that you want to add: ")
+                with open(self.path, "a+") as file:
+                    file.write(key)
+                print(f"{key} added to your file!")
+
+
         else:
-            print("There is no file in the given path")
+            print("There is no file in the given path!")
 
 
 
+    def isFileExist(self):
+        """
+            Helper method that checks file exist or not
+            return bool
+        """
+        return Path(self.path).exists()
        
 
 
 
 
 
+if __name__ == "__main__":
 
-ft = FileTool('C:\\Users\\BarisAyten\\Desktop\\pythonfiletool-thealibrs\\lorem1.txt')
-
-ft.file_operations()
+    ft = FileTool('C:\\Users\\BarisAyten\\Desktop\\pythonfiletool-thealibrs\\demofile.txt')
+    ft.file_operations()
 
