@@ -5,16 +5,27 @@ class FileTool:
     # List of exceptions message
     NO_FILE_EXCEPTION = "There is no file in the given path!"
     UNMATCHED_FILE_TYPE_EXCEPTION = "Unmatched file type!"
-    IVALID_OPERATION_TYPE = "Invalid operation type!"
+    INVALID_OPERATION_TYPE_EXCEPTION = "Invalid operation type!"
 
     # List of menu message
     JSON_OPERATIONS_MENU = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
     FILE_OPERATIONS_MENU = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
 
+    # List of input messages
+    ASK_FOR_TXT_FILE_NAME = "Enter file name for txt file: "
+    ASK_FOR_JSON_FILE_NAME = "Enter file name for json file: "
+    ASK_FOR_DELETE = "Enter a word that you want to delete from the file: "
+    ASK_FOR_SEARCH = "Enter a word that you want to search: "
+    ASK_FOR_ADD = "Enter anything that you want to add: "
+
+    # List of output messages
+    SUCCESS_MESSAGE = "Operation Succes!"
+    NO_MATCH_FOR_SEARCH = "Nothing matched in the content!"
+    
+
     def __init__(self, path, fields = []):
         self.path = path
         self.fields = fields
-
 
     def isFileExist(self):
         """
@@ -49,7 +60,7 @@ class FileTool:
                [1] imports whole contents of json into txt file.
                [2] imports whole contents of txt into json file.
         """
-        choice = input(FileTool.FILE_OPERATIONS_MENU)
+        choice = input(FileTool.JSON_OPERATIONS_MENU)
 
         if choice == "1":
             if Path(self.path).suffix == ".json": # checks whether file is a json file or not
@@ -57,11 +68,11 @@ class FileTool:
                     with open(self.path,"r") as json_file: # opens json file
                         json_content = json.load(json_file) # takes whole contents of json file
 
-                    new_file_name = Path(self.path).stem+".txt" 
-                    with open(new_file_name,"w+") as new_file:
+                    new_file_name = input(FileTool.ASK_FOR_TXT_FILE_NAME)
+                    with open(new_file_name+".txt","w+") as new_file:
                         new_file.write(str(json_content))
 
-                    print("PROCESS COMPLETED!")
+                    print(FileTool.SUCCESS_MESSAGE)
                 else:
                     print(FileTool.NO_FILE_EXCEPTION)
             else:
@@ -70,15 +81,23 @@ class FileTool:
         elif choice == "2":
             if Path(self.path).suffix == ".txt":
                 if self.isFileExist():
-                    pass
+                    file_content = {}
+                    with open(self.path) as file:
+                        for line in file:
+                            command, description = line.strip().split(None, 1)
+                            file_content[command] = description.strip()
+                        
+                    new_file_name = input(FileTool.ASK_FOR_JSON_FILE_NAME)
+
+                    with open(new_file_name+".json","w") as file:
+                        json.dump(file_content,file,indent = 4, sort_keys = False)
+                    print(FileTool.SUCCESS_MESSAGE)
                 else:
                     print(FileTool.NO_FILE_EXCEPTION)
             else:
                 print(FileTool.UNMATCHED_FILE_TYPE_EXCEPTION)
-                
         else:
-                print(FileTool.IVALID_OPERATION_TYPE)
-
+                print(FileTool.INVALID_OPERATION_TYPE_EXCEPTION)
 
     def file_operations(self):
         """
@@ -89,7 +108,7 @@ class FileTool:
             choice = input(FileTool.FILE_OPERATIONS_MENU)
 
             if choice == "1": # searching, if choice 1
-                key = input("Enter a word that you want to search: ")
+                key = input(FileTool.ASK_FOR_SEARCH)
                 with open(self.path) as file:
                     contents = file.readlines() # reads all lines
                 found_lines = [ data for data in contents if key in data ] # creates a list that if matches that desired word with content
@@ -97,10 +116,10 @@ class FileTool:
                 if len(found_lines) != 0:
                     print(f"{key} found in {len(found_lines)} lines: \n", *found_lines)
                 else:
-                    print(f"Nothing matched with {key} in the content!")
+                    print(FileTool.NO_MATCH_FOR_SEARCH)
             
             elif choice == "2": # deleting
-                key = input("Enter a word that you want to delete from the file: ")
+                key = input(FileTool.ASK_FOR_DELETE)
                 current_file = open(self.path)
                 updated_file = open("updated_"+self.path,"w")
                 
@@ -108,38 +127,30 @@ class FileTool:
                     if key in line:
                         updated_file.write(line.replace(key,""))
                     else:
-                        print(f"No matching with {key}")
+                        print(FileTool.NO_MATCH_FOR_SEARCH)
                         break
                 current_file.close()
                 updated_file.close()
                 
 
             elif choice == "3":
-                key = input("Enter anything that you want to add: ")
+                key = input(FileTool.ASK_FOR_ADD)
                 with open(self.path, "a+") as file:
                     file.write(key)
-                print(f"{key} added to your file!")
+                print(FileTool.SUCCESS_MESSAGE)
             
             elif choice == "4":
                 pass
                 
             else:
-                print(FileTool.IVALID_OPERATION_TYPE)
+                print(FileTool.INVALID_OPERATION_TYPE_EXCEPTION)
         else:
-            print("There is no file in the given path!")
-
-
-
-   
-       
-
-
-
+            print(FileTool.NO_FILE_EXCEPTION)
 
 
 if __name__ == "__main__":
 
-    file_path = 'lorem2.json'
+    file_path = 'lorem.txt'
     ft = FileTool(file_path)
     ft.json_operations()
 
