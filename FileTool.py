@@ -2,6 +2,10 @@ import csv,json
 from pathlib import Path
 
 class FileTool:
+    # List of exceptions message
+    NO_FILE_EXCEPTION = "There is no file in the given path!"
+    UNMATCHED_FILE_TYPE_EXCEPTION = "Unmatched file type!"
+
     def __init__(self, path, fields = []):
         self.path = path
         self.fields = fields
@@ -36,29 +40,39 @@ class FileTool:
     
     def json_operations(self):
         """
-            This method is used to imports 
-            whole contents of json into txt file.
+            This method is used to 
+               [1] imports whole contents of json into txt file.
+               [2] imports whole contents of txt into json file.
         """
         menu = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
         choice = input(menu)
 
         if choice == "1":
-            if Path(self.path).suffix == ".json":
-                if self.isFileExist():
-                    with open(self.path,"r") as json_file:
-                        json_content = json.load(json_file)
-                        print(json_content)
-                    new_file_name = Path(self.path).stem+".txt"
+            if Path(self.path).suffix == ".json": # checks whether file is a json file or not
+                if self.isFileExist(): # checks whether file exits
+                    with open(self.path,"r") as json_file: # opens json file
+                        json_content = json.load(json_file) # takes whole contents of json file
+
+                    new_file_name = Path(self.path).stem+".txt" 
                     with open(new_file_name,"w+") as new_file:
                         new_file.write(str(json_content))
+
                     print("PROCESS COMPLETED!")
                 else:
-                    print("There is no file in the given path!")
+                    print(FileTool.NO_FILE_EXCEPTION)
             else:
-                print("Unmatched file type!")
+                print(FileTool.UNMATCHED_FILE_TYPE_EXCEPTION)
+
+        elif choice == "2":
+            if Path(self.path).suffix == ".txt":
+                if self.isFileExist():
+                    pass
+                else:
+                    print(FileTool.NO_FILE_EXCEPTION)
+            else:
+                print(FileTool.UNMATCHED_FILE_TYPE_EXCEPTION)
 
 
-    
     def file_operations(self):
         """
             This method is used to File Operations like 
@@ -68,7 +82,7 @@ class FileTool:
             menu = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
             choice = input(menu)
 
-            if choice == "1": # searching if choice 1
+            if choice == "1": # searching, if choice 1
                 key = input("Enter a word that you want to search: ")
                 with open(self.path) as file:
                     contents = file.readlines() # reads all lines
