@@ -5,6 +5,10 @@ class FileTool:
     # List of exceptions message
     NO_FILE_EXCEPTION = "There is no file in the given path!"
     UNMATCHED_FILE_TYPE_EXCEPTION = "Unmatched file type!"
+    
+    # List of menu message
+    JSON_OPERATIONS_MENU = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
+    FILE_OPERATIONS_MENU = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
 
     def __init__(self, path, fields = []):
         self.path = path
@@ -44,8 +48,7 @@ class FileTool:
                [1] imports whole contents of json into txt file.
                [2] imports whole contents of txt into json file.
         """
-        menu = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
-        choice = input(menu)
+        choice = input(FileTool.FILE_OPERATIONS_MENU)
 
         if choice == "1":
             if Path(self.path).suffix == ".json": # checks whether file is a json file or not
@@ -79,8 +82,7 @@ class FileTool:
             searching, reading, updating and deleting.
         """
         if self.isFileExist():
-            menu = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
-            choice = input(menu)
+            choice = input(FileTool.FILE_OPERATIONS_MENU)
 
             if choice == "1": # searching, if choice 1
                 key = input("Enter a word that you want to search: ")
