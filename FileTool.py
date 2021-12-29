@@ -5,7 +5,8 @@ class FileTool:
     # List of exceptions message
     NO_FILE_EXCEPTION = "There is no file in the given path!"
     UNMATCHED_FILE_TYPE_EXCEPTION = "Unmatched file type!"
-    
+    IVALID_OPERATION_TYPE = "Invalid operation type!"
+
     # List of menu message
     JSON_OPERATIONS_MENU = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
     FILE_OPERATIONS_MENU = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
@@ -74,6 +75,9 @@ class FileTool:
                     print(FileTool.NO_FILE_EXCEPTION)
             else:
                 print(FileTool.UNMATCHED_FILE_TYPE_EXCEPTION)
+                
+        else:
+                print(FileTool.IVALID_OPERATION_TYPE)
 
 
     def file_operations(self):
@@ -119,9 +123,8 @@ class FileTool:
             elif choice == "4":
                 pass
                 
-
-
-
+            else:
+                print(FileTool.IVALID_OPERATION_TYPE)
         else:
             print("There is no file in the given path!")
 
