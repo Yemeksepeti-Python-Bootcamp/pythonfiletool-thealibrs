@@ -29,15 +29,39 @@ class FileTool:
 
     def read_file_content(self):
         """
-            This method is used to read all data from files.
+            This method is used to read 
+            all data from files.
         """
         with open(self.path, "r") as file:
             contents = file.read()
             print(contents)
     
     def csv_operations(self):
-        #TODO: create functionality for csv ops.
-        pass
+        """
+        List of operations:
+            [1] CSV to TXT 
+            [2] CSV to JSON
+            [3] Print a line from CSV
+        """
+        choice = input(TextHelper.CSV_OPERATIONS_MENU)
+
+        if choice == "1":
+            if Path(self.path).suffix == ".csv":
+                if self.isFileExist():
+                    txt_file_name = input(TextHelper.ASK_FOR_TXT_FILE_NAME)
+                    with open(txt_file_name+".txt", "w") as txt_file:
+                        with open(self.path,"r") as csv_file:
+                            for row in csv.reader(csv_file):
+                                txt_file.write(" ".join(row)+"\n")
+                    
+                    print(TextHelper.SUCCESS_MESSAGE)
+                else:
+                    print(TextHelper.NO_FILE_EXCEPTION)
+            else:
+                print(TextHelper.UNMATCHED_FILE_TYPE_EXCEPTION)
+        else:
+            print(TextHelper.INVALID_OPERATION_TYPE_EXCEPTION)
+
 
     def json_operations(self):
         """
@@ -138,7 +162,7 @@ class FileTool:
 
 if __name__ == "__main__":
 
-    file_path = 'lorem.txt'
+    file_path = 'heart.csv'
     ft = FileTool(file_path)
-    ft.json_operations()
+    ft.csv_operations()
 
