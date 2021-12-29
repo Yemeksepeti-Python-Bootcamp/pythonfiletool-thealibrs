@@ -56,14 +56,30 @@ class FileTool:
                     print(f"Nothing matched with {key} in the content!")
             
             elif choice == "2": # deleting
-                # key = input("Enter a word that you want to delete: ")
-                pass
+                key = input("Enter a word that you want to delete: ")
+                current_file = open(self.path)
+                updated_file = open("updated_"+self.path,"w")
+                
+                for line in current_file:
+                    if key in line:
+                        updated_file.write(line.replace(key,""))
+                    else:
+                        print(f"No matching with {key}")
+                        break
+                current_file.close()
+                updated_file.close()
+                
 
             elif choice == "3":
                 key = input("Enter anything that you want to add: ")
                 with open(self.path, "a+") as file:
                     file.write(key)
                 print(f"{key} added to your file!")
+            
+            elif choice == "4":
+                pass
+                
+
 
 
         else:
@@ -80,6 +96,7 @@ class FileTool:
 
 if __name__ == "__main__":
 
-    ft = FileTool('C:\\Users\\BarisAyten\\Desktop\\pythonfiletool-thealibrs\\demofile.txt')
+    file_path = 'demofile.txt'
+    ft = FileTool(file_path)
     ft.file_operations()
 
