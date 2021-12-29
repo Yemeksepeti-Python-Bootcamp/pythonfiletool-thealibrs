@@ -121,8 +121,8 @@ class FileTool:
                 print(TextHelper.SUCCESS_MESSAGE)
             
             elif choice == "4":
-                pass
-                
+                # TODO add update functionality
+                pass 
             else:
                 print(TextHelper.INVALID_OPERATION_TYPE_EXCEPTION)
         else:
