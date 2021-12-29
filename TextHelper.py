@@ -10,9 +10,9 @@ class TextHelper:
     SAME_FILE_EXCEPTION = "There is same file in given path"
 
     # menu messages
-    JSON_OPERATIONS_MENU = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
-    FILE_OPERATIONS_MENU = "List of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
-    CSV_OPERATIONS_MENU = "List of operations:\n\n[1] CSV to TXT \n[2] CSV to JSON\n[3] Print a line from CSV2"
+    JSON_OPERATIONS_MENU = "\nList of operations:\n\n[1] JSON to TXT\n[2] TXT to JSON\n"
+    FILE_OPERATIONS_MENU = "\nList of operations:\n\n[1] Searching\n[2] Deleting\n[3] Adding\n[4] Updating\n"
+    CSV_OPERATIONS_MENU = "\nList of operations:\n\n[1] CSV to TXT \n[2] CSV to JSON\n[3] Print a line from CSV\n"
 
     # input messages
     ASK_FOR_FILE_NAME = "Enter file name: "
