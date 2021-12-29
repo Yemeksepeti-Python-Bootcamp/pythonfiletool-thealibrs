@@ -9,8 +9,8 @@ class FileTool:
 
     def isFileExist(self):
         """
-            Helper method that checks the file exist or not
-            returns bool 
+            - Helper method that checks the file exist or not
+            - returns bool 
         """
         return Path(self.path).exists()
 
@@ -26,14 +26,38 @@ class FileTool:
         except:
             print("There is same file in given path")
 
-    
-    def read_file(self):
+    def read_file_content(self):
         """
             This method is used to read all data from files.
         """
         with open(self.path, "r") as file:
             contents = file.read()
             print(contents)
+    
+    def json_operations(self):
+        """
+            This method is used to imports 
+            whole contents of json into txt file.
+        """
+        menu = "List of operations:\n\n[1] JSON to TXT \n[2] TXT to JSON\n"
+        choice = input(menu)
+
+        if choice == "1":
+            if Path(self.path).suffix == ".json":
+                if self.isFileExist():
+                    with open(self.path,"r") as json_file:
+                        json_content = json.load(json_file)
+                        print(json_content)
+                    new_file_name = Path(self.path).stem+".txt"
+                    with open(new_file_name,"w+") as new_file:
+                        new_file.write(str(json_content))
+                    print("PROCESS COMPLETED!")
+                else:
+                    print("There is no file in the given path!")
+            else:
+                print("Unmatched file type!")
+
+
     
     def file_operations(self):
         """
@@ -96,7 +120,7 @@ class FileTool:
 
 if __name__ == "__main__":
 
-    file_path = 'demofile.txt'
+    file_path = 'lorem2.json'
     ft = FileTool(file_path)
-    ft.file_operations()
+    ft.json_operations()
 
