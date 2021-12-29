@@ -1,5 +1,6 @@
 import csv,json
 from pathlib import Path
+from typing import Text
 from TextHelper import TextHelper
 
 class FileTool:
@@ -52,15 +53,40 @@ class FileTool:
                     with open(txt_file_name+".txt", "w") as txt_file:
                         with open(self.path,"r") as csv_file:
                             for row in csv.reader(csv_file):
-                                txt_file.write(" ".join(row)+"\n")
-                    
+                                txt_file.write(" ".join(row)+"\n")  
                     print(TextHelper.SUCCESS_MESSAGE)
                 else:
                     print(TextHelper.NO_FILE_EXCEPTION)
             else:
                 print(TextHelper.UNMATCHED_FILE_TYPE_EXCEPTION)
+        
+        elif choice == "2":
+            if Path(self.path).suffix == ".csv":
+                if self.isFileExist():
+
+                    data = [] # for the collecting each line of csv
+                    with open(self.path) as csv_file:
+                        csv_content = csv.DictReader(csv_file)
+                        for rows in csv_content:
+                            data.append(rows)
+
+                    json_file_name = input(TextHelper.ASK_FOR_JSON_FILE_NAME)
+
+                    with open(json_file_name+".json","w") as json_file:
+                        json_content = json.dumps(data, indent = 4) 
+                        json_file.write(json_content)
+                    print(TextHelper.SUCCESS_MESSAGE)
+
+                else:
+                    print(TextHelper.NO_FILE_EXCEPTION)
+            else:
+                print(TextHelper.UNMATCHED_FILE_TYPE_EXCEPTION)
+
         else:
             print(TextHelper.INVALID_OPERATION_TYPE_EXCEPTION)
+        
+       
+
 
 
     def json_operations(self):
