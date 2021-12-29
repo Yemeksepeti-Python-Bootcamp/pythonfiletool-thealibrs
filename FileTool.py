@@ -11,7 +11,7 @@ class FileTool:
     def isFileExist(self):
         """
             - Helper method that checks the file exist or not
-            - returns bool 
+            - The function returns bool 
         """
         return Path(self.path).exists()
 
@@ -35,6 +35,10 @@ class FileTool:
             contents = file.read()
             print(contents)
     
+    def csv_operations(self):
+        #TODO: create functionality for csv ops.
+        pass
+
     def json_operations(self):
         """
             This method is used to 
@@ -83,7 +87,10 @@ class FileTool:
     def file_operations(self):
         """
             This method is used to File Operations like 
-            searching, reading, updating and deleting.
+                [1] searching, 
+                [2] reading,
+                [3] updating,
+                [4] deleting.
         """
         if self.isFileExist():
             choice = input(TextHelper.FILE_OPERATIONS_MENU)
