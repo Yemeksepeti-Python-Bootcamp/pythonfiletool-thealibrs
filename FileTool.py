@@ -56,7 +56,7 @@ class FileTool:
                     print(f"Nothing matched with {key} in the content!")
             
             elif choice == "2": # deleting
-                key = input("Enter a word that you want to delete: ")
+                key = input("Enter a word that you want to delete from the file: ")
                 current_file = open(self.path)
                 updated_file = open("updated_"+self.path,"w")
                 
