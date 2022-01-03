@@ -84,10 +84,6 @@ class FileTool:
 
         else:
             print(TextHelper.INVALID_OPERATION_TYPE_EXCEPTION)
-        
-       
-
-
 
     def json_operations(self):
         """
@@ -141,6 +137,7 @@ class FileTool:
                 [2] reading,
                 [3] updating,
                 [4] deleting.
+                [5] print the whole content of file
         """
         if self.isFileExist():
             choice = input(TextHelper.FILE_OPERATIONS_MENU)
@@ -170,16 +167,18 @@ class FileTool:
                 current_file.close()
                 updated_file.close()
                 
-
             elif choice == "3":
                 key = input(TextHelper.ASK_FOR_ADD)
                 with open(self.path, "a+") as file:
-                    file.write(key)
+                    file.write("\n"+key)
                 print(TextHelper.SUCCESS_MESSAGE)
             
             elif choice == "4":
                 # TODO add update functionality
                 pass 
+
+            elif choice == "5":
+                self.read_file_content() # reads the whole content of file
             else:
                 print(TextHelper.INVALID_OPERATION_TYPE_EXCEPTION)
         else:
@@ -188,7 +187,7 @@ class FileTool:
 
 if __name__ == "__main__":
 
-    file_path = 'heart.csv'
+    file_path = 'demofile.txt'
     ft = FileTool(file_path)
-    ft.csv_operations()
+    ft.file_operations()
 
