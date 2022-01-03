@@ -22,7 +22,9 @@ class TextHelper:
     ASK_FOR_SEARCH = "Enter a word that you want to search: "
     ASK_FOR_ADD = "Enter anything that you want to add: "
     ASK_FOR_FILE_FORMAT = "Write file format?\n- csv\n- json\n- txt\n"
+    ASK_FOR_WHICH_LINE = "Enter a line number for printing: \n"
 
     # output messages
     SUCCESS_MESSAGE = "Operation Succes!"
     NO_MATCH_FOR_SEARCH = "Nothing matched in the content!"
+    GLIMPSE_MESSAGE = "Here is your data content...\n"
