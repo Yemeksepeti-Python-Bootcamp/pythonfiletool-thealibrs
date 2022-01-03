@@ -184,7 +184,6 @@ class FileTool:
                 print(TextHelper.SUCCESS_MESSAGE)
             
             elif choice == "4":
-                # TODO add update functionality
                 pass 
 
             elif choice == "5":
