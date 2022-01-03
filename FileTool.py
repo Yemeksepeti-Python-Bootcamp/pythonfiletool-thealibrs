@@ -82,6 +82,16 @@ class FileTool:
             else:
                 print(TextHelper.UNMATCHED_FILE_TYPE_EXCEPTION)
 
+        elif choice == "3":
+            import pandas as pd
+            df = pd.read_csv(self.path)
+
+            print(TextHelper.GLIMPSE_MESSAGE)
+            print(df.head(10))
+
+            line = int(input(TextHelper.ASK_FOR_WHICH_LINE))
+            print(df.iloc[line])
+
         else:
             print(TextHelper.INVALID_OPERATION_TYPE_EXCEPTION)
 
@@ -187,7 +197,7 @@ class FileTool:
 
 if __name__ == "__main__":
 
-    file_path = 'demofile.txt'
+    file_path = 'heart.csv'
     ft = FileTool(file_path)
-    ft.file_operations()
+    ft.csv_operations()
 
