@@ -98,8 +98,8 @@ class FileTool:
     def json_operations(self):
         """
             This method is used to 
-               [1] imports whole contents of json into txt file.
-               [2] imports whole contents of txt into json file.
+            [1] imports whole contents of json into txt file.
+            [2] imports whole contents of txt into json file.
         """
         choice = input(TextHelper.JSON_OPERATIONS_MENU)
 
@@ -109,9 +109,9 @@ class FileTool:
                     with open(self.path,"r") as json_file: # opens json file
                         json_content = json.load(json_file) # takes whole contents of json file
 
-                    new_file_name = input(TextHelper.ASK_FOR_TXT_FILE_NAME)
+                    new_file_name = input(TextHelper.ASK_FOR_TXT_FILE_NAME) # asks for nw txt file name
                     with open(new_file_name+".txt","w+") as new_file:
-                        new_file.write(str(json_content))
+                        new_file.write(str(json_content)) # writes the whole content of json file to nw txt file
 
                     print(TextHelper.SUCCESS_MESSAGE)
                 else:
@@ -150,21 +150,21 @@ class FileTool:
                 [5] print the whole content of file
         """
         if self.isFileExist():
-            choice = input(TextHelper.FILE_OPERATIONS_MENU)
+            choice = input(TextHelper.FILE_OPERATIONS_MENU) # takes input from the user
 
-            if choice == "1": # searching, if choice 1
-                key = input(TextHelper.ASK_FOR_SEARCH)
+            if choice == "1": # searching operation, if choice 1
+                key = input(TextHelper.ASK_FOR_SEARCH) # the user enters the word to be searched
                 with open(self.path) as file:
                     contents = file.readlines() # reads all lines
                 found_lines = [ data for data in contents if key in data ] # creates a list that if matches that desired word with content
 
-                if len(found_lines) != 0:
+                if len(found_lines) != 0: # if there are some matcing, prints
                     print(f"{key} found in {len(found_lines)} lines: \n", *found_lines)
-                else:
+                else: # if no match
                     print(TextHelper.NO_MATCH_FOR_SEARCH)
             
-            elif choice == "2": # deleting
-                key = input(TextHelper.ASK_FOR_DELETE)
+            elif choice == "2": # deleting operation, if choice 2
+                key = input(TextHelper.ASK_FOR_DELETE) # the user enters the word to be deleted
                 current_file = open(self.path)
                 updated_file = open("updated_"+self.path,"w")
                 
@@ -177,14 +177,11 @@ class FileTool:
                 current_file.close()
                 updated_file.close()
                 
-            elif choice == "3":
+            elif choice == "3": # adding operation, if choice 3
                 key = input(TextHelper.ASK_FOR_ADD)
                 with open(self.path, "a+") as file:
                     file.write("\n"+key)
                 print(TextHelper.SUCCESS_MESSAGE)
-            
-            elif choice == "4":
-                pass 
 
             elif choice == "5":
                 self.read_file_content() # reads the whole content of file
@@ -193,10 +190,8 @@ class FileTool:
         else:
             print(TextHelper.NO_FILE_EXCEPTION)
 
-
 if __name__ == "__main__":
 
     file_path = 'heart.csv'
     ft = FileTool(file_path)
     ft.csv_operations()
-

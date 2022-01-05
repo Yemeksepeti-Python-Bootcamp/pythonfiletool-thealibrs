@@ -1,7 +1,7 @@
 class TextHelper:
     """
     This class was created for enrich 
-    the readability of main class.
+    the readability of FileTool class.
     """
     # exceptions message
     NO_FILE_EXCEPTION = "There is no file in the given path!"
